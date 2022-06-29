@@ -1,0 +1,18 @@
+.item-count{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 50%;
+    margin: auto;
+}
+
+.item-count button{
+    cursor: pointer;
+    background-color: lightblue;
+}
+.item-count-items{
+    width: 145px;
+    display: flex;
+    justify-content: space-around;
+}
