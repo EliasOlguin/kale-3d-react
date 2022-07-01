@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ItemCount } from './ItemCount/ItemCount';
 import "./ItemListContainer.css"
 import { ItemList } from './Items/ItemList';
@@ -18,10 +18,12 @@ export const ItemListContainer = ({greting}) => {
       res(productos)
     }, 2000);
   })
+  const [products, setProducts] = useState([])
 
   useEffect(()=>{
     perdirProductos.then(res=>{
       console.log(res);
+      setProducts(res)
     }).catch(e=>{
       console.log(e);
     })
@@ -36,7 +38,7 @@ export const ItemListContainer = ({greting}) => {
         <h3>{greting} </h3>
 
         <ItemCount stock={5} initial={1} onAdd={onAdd} />
-        <ItemList productos={productos}/>
+        <ItemList productos={products}/>
     </div>
   )
 }
