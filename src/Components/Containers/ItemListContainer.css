@@ -1,5 +1,9 @@
-h3{
+h1{
     text-align: center;
     width: 50%;
     margin: auto;
+    margin-top: 10px;
+}
+.productos{
+    display: flex;
 }

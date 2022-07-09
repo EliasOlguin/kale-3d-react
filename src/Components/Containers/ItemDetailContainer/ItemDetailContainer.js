@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { productos } from '../../../services/FakeApi';
 import { ItemDetail } from './ItemDetail/ItemDetail';
 
-const producto = {
-    id:0, nombre:"Soporte de joysticks", precio:1800, stock:10, img:"assets/soporteJoystick.jpg",descripcion:"Soporte para controles de ps4/ps5/xbos/mando generico. Una altura de 15cm y pintado a mano"
-}
 
 export const ItemDetailContainer = () => {
+   const {productId} = useParams();
 
-    const getItem = new Promise((res,rej)=>{
-        setTimeout(() => {
-          res(producto)
-        }, 2000);
-      })
-      const [product, setProduct] = useState({})
-    
-      useEffect(()=>{
-         getItem.then(res=>{
-          console.log(res);
+  const getItem = new Promise((res,rej)=>{
+      setTimeout(() => {
+        res(productos)
+      }, 1000);
+    })
+    const [product, setProduct] = useState({})
+  
+    useEffect(()=>{
+        getItem.then(res=>{
+        console.log(res);
+        if(productId){
+          const filter = productos.find(p => p.id == productId)
+          setProduct(filter)
+        }else{
           setProduct(res)
-        }).catch(e=>{
-          console.log(e);
-        })
-      },[])
+        }
+      }).catch(e=>{
+        console.log(e);
+      })
+    },[])
 
   return (
     <>  
