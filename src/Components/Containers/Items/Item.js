@@ -1,17 +1,19 @@
 import { CardActionArea, CardActions, CardContent, Link, Typography } from '@mui/material'
 import { Button } from 'bootstrap'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Card, CardImg } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+import { contexto } from '../../Context/CartContexto'
 import { ItemCount } from '../ItemCount/ItemCount'
 import "./Item.css"
 
 export const Item = ({producto,i}) => {
+  
   const [stock, setStock] = useState(producto.stock)
   const [comprar, setComprar] = useState(false)
   const onAdd = (count) =>{
     setComprar(true)
-    setStock(count)
+    // setStock(count)
   }
   // useEffect(() => {
   //   if(producto.stock == 10 & stock == 10){
@@ -42,21 +44,21 @@ export const Item = ({producto,i}) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className='col'>
-        <NavLink to={"/product/"+producto.id}>
-          <button className='btn btn-warning'>
-            Ver detalles
-          </button>
-        </NavLink>
+      <CardActions className='buttons'>
         <div>
           {
             comprar?  <NavLink to={"/cart"}>
               <button className='btn btn-success'>
                 Ir al carrito
               </button>
-              </NavLink>:<ItemCount stock={producto.stock} onAdd={onAdd}/>
+              </NavLink>:<ItemCount stock={producto.stock} onAdd={onAdd} producto={producto}/>
           }
         </div>
+        <NavLink to={"/product/"+producto.id}>
+          <button className='btn btn-warning'>
+            Ver detalles
+          </button>
+        </NavLink>
         
       </CardActions>
 
