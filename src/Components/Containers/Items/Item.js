@@ -45,15 +45,6 @@ export const Item = ({producto,i}) => {
         </CardContent>
       </CardActionArea>
       <CardActions className='buttons'>
-        <div>
-          {
-            comprar?  <NavLink to={"/cart"}>
-              <button className='btn btn-success'>
-                Ir al carrito
-              </button>
-              </NavLink>:<ItemCount stock={producto.stock} onAdd={onAdd} producto={producto}/>
-          }
-        </div>
         <NavLink to={"/product/"+producto.id}>
           <button className='btn btn-warning'>
             Ver detalles

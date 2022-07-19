@@ -1,6 +1,7 @@
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material';
 import React from 'react'
 import {  CardImg } from 'react-bootstrap'
+import { ItemCount } from '../../ItemCount/ItemCount';
 import "./ItemDetail.css"
 
 export const ItemDetail = ({producto}) => {
@@ -37,6 +38,9 @@ export const ItemDetail = ({producto}) => {
           </CardContent>
         </CardActionArea>
       </Card>
+      <div>
+        <ItemCount stock={producto.stock} producto={producto}/>
+      </div>
     </div>
   )
 }

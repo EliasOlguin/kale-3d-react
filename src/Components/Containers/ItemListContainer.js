@@ -7,8 +7,11 @@ import { Mates } from '../../services/Mates';
 import { Figuras } from '../../services/Figuras';
 import "./ItemListContainer.css"
 import { ItemList } from './Items/ItemList';
+import { db } from "../firebase/firebase";
+import { getDocs, collection, query } from "firebase/firestore";
 
 export const ItemListContainer = ({greeting}) => {
+  console.log(db);
   
   const [products, setProducts] = useState([])
   
@@ -20,6 +23,11 @@ export const ItemListContainer = ({greeting}) => {
     }, 2000);
   })
   useEffect(()=>{
+
+      // const productsColletion = collection(db, "productos")
+      // getDocs(productsColletion)
+      // .then(data => console.log(data))
+
       perdirProductos.then(res=>{
         console.log(categoryId);
         if (categoryId){
