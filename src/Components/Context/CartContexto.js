@@ -13,6 +13,7 @@ const CustomProvider = ({children}) => {
     const consulta = existeProducto(producto.id)
     console.log(consulta);
     if(!consulta){
+      // producto.stock = producto.stock - count
       setProductos([...productos, producto])
       console.log("entre a agregar ");
     }else{
@@ -29,14 +30,18 @@ const CustomProvider = ({children}) => {
     return estado
   }
   const deleteProducto = (producto) =>{
-      const arrDel = productos.filter(p => p.id == !producto.id)
+    console.log("borre a ", producto);
+      const arrDel = productos.filter(p => p.id !== producto.id)
       setProductos(arrDel)
+  }
+  const getTotal = () =>{
+    return productos.length
   }
   const clearProductos = () =>{
     setProductos([])
   }
     return (
-      <Provider value={{productos, agregarProducto}}>
+      <Provider value={{productos, agregarProducto, deleteProducto, getTotal}}>
         {children}
       </Provider>
     )

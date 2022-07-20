@@ -4,17 +4,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Card, CardImg } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { contexto } from '../../Context/CartContexto'
-import { ItemCount } from '../ItemCount/ItemCount'
-import "./Item.css"
+import "./ItemCart.css"
 
-export const Item = ({producto,i}) => {
-  
+export const ItemCart = ({producto,i}) => {
+  const {deleteProducto} = useContext(contexto)
   const [stock, setStock] = useState(producto.stock)
   const [comprar, setComprar] = useState(false)
   const onAdd = (count) =>{
     setComprar(true)
     console.log(count);
     // setStock(count)
+  }
+  const handleDelete = (produ) => {
+    deleteProducto(produ)
   }
   // useEffect(() => {
   //   if(producto.stock == 10 & stock == 10){
@@ -28,7 +30,7 @@ export const Item = ({producto,i}) => {
   return (
     <Card style={{width:"14rem", height:"29rem", padding:"10px"}}>
       <CardActionArea>
-        <CardImg src={producto.img} variant="top" alt={producto.nombre} style={{height:"15rem"}} />
+        <CardImg src={producto.img} variant="top" alt={producto.nombre} style={{height:"15rem"}}  />
         <CardContent>
           <Typography
             gutterBottom
@@ -41,17 +43,14 @@ export const Item = ({producto,i}) => {
             Precio:{producto.precio}
           </Typography>
           <Typography variant='body2' color="text.secondary">
-            Stock:{stock}
+            Cantidad:{stock}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className='buttons'>
-        <NavLink to={"/product/"+producto.id}>
-          <button className='btn btn-warning'>
-            Ver detalles
+          <button className='btn btn-danger' onClick={()=>handleDelete(producto)}>
+            Borrar del carrito
           </button>
-        </NavLink>
-        
       </CardActions>
 
     </Card>

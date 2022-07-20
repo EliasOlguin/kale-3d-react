@@ -1,12 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import { ItemListContainer } from '../Containers/ItemListContainer';
 import { contexto } from '../Context/CartContexto'
 
  const Cart = () => {
   const {productos} = useContext(contexto)
+  const [carrito, setCarrito] = useState(true)
   console.log(productos);
   return (
     <div>
-        <h1>Este es tu carrito:</h1>
+      <div>
+        <ItemListContainer greeting={"Este es tu carrito:"} carrito={carrito} carritoContent={productos} />
+      </div>
     </div>
   )
 }

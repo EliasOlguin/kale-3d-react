@@ -26,13 +26,13 @@ export const ItemCount = ({stock,initial = 1,onAdd, producto}) => {
         agregarProducto(producto, count)
     }
   return (
-    <div className='item-count'>
-        <div className='item-count-items'>
+    <div className='item-count col-12'>
+        <div className='item-count-items '>
         <button onClick={handleSub} className="btn btn-danger">-</button> 
         <h3>{count}</h3> 
         <button onClick={handlerAdd} className="btn btn-success">+</button>
         </div>
-        <button onClick={agregarAlCarrito} className="btn btn-primary">Agregar al carrito</button>
+        <button onClick={agregarAlCarrito} className="btn btn-primary ">Agregar al carrito</button>
     </div>
   )
 }
