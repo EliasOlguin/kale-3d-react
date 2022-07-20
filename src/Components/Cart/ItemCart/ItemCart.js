@@ -28,9 +28,9 @@ export const ItemCart = ({producto,i}) => {
   
   
   return (
-    <Card style={{width:"18rem"}}>
+    <Card style={{width:"14rem", height:"29rem", padding:"10px"}}>
       <CardActionArea>
-        <CardImg src={producto.img} variant="top" alt={producto.nombre}  />
+        <CardImg src={producto.img} variant="top" alt={producto.nombre} style={{height:"15rem"}}  />
         <CardContent>
           <Typography
             gutterBottom
@@ -43,7 +43,7 @@ export const ItemCart = ({producto,i}) => {
             Precio:{producto.precio}
           </Typography>
           <Typography variant='body2' color="text.secondary">
-            Stock:{stock}
+            Cantidad:{stock}
           </Typography>
         </CardContent>
       </CardActionArea>
