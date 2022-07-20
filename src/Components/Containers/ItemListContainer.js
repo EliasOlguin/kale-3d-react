@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { productos } from '../../services/FakeApi';
-import { Lamparas } from '../../services/Lamparas';
-import { Llaveros } from '../../services/Llaveros';
-import { Mates } from '../../services/Mates';
-import { Figuras } from '../../services/Figuras';
 import "./ItemListContainer.css"
 import { ItemList } from './Items/ItemList';
 import { db } from "../firebase/firebase";
 import { getDocs, collection, query } from "firebase/firestore";
 
-export const ItemListContainer = ({greeting}) => {
+export const ItemListContainer = ({greeting, carrito=false, carritoContent}) => {
   console.log(db);
   
   const [products, setProducts] = useState([])
@@ -19,7 +15,7 @@ export const ItemListContainer = ({greeting}) => {
 
   const perdirProductos = new Promise((res,rej)=>{
     setTimeout(() => {
-      res(productos)
+      carrito? res(carritoContent):res(productos)
     }, 2000);
   })
   useEffect(()=>{
@@ -31,7 +27,7 @@ export const ItemListContainer = ({greeting}) => {
       perdirProductos.then(res=>{
         console.log(categoryId);
         if (categoryId){
-          const filter = productos.filter((p)=> p.category == categoryId)
+          const filter = productos.filter((p)=> p.category === categoryId)
           setProducts(filter)
         }else{
           setProducts(res)
@@ -47,9 +43,9 @@ export const ItemListContainer = ({greeting}) => {
   }
   return (
     <div className='container'>
-      <h1>{greeting} estos son nuestro productos</h1>
+      <h1>{greeting} </h1>
       <div className='productos'>
-      <ItemList productos={products}/>
+      <ItemList productos={products} carrito={carrito} />
       </div>
     </div>
   )

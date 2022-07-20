@@ -4,17 +4,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Card, CardImg } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { contexto } from '../../Context/CartContexto'
-import { ItemCount } from '../ItemCount/ItemCount'
-import "./Item.css"
+import "./ItemCart.css"
 
-export const Item = ({producto,i}) => {
-  
+export const ItemCart = ({producto,i}) => {
+  const {deleteProducto} = useContext(contexto)
   const [stock, setStock] = useState(producto.stock)
   const [comprar, setComprar] = useState(false)
   const onAdd = (count) =>{
     setComprar(true)
     console.log(count);
     // setStock(count)
+  }
+  const handleDelete = (produ) => {
+    deleteProducto(produ)
   }
   // useEffect(() => {
   //   if(producto.stock == 10 & stock == 10){
@@ -46,12 +48,9 @@ export const Item = ({producto,i}) => {
         </CardContent>
       </CardActionArea>
       <CardActions className='buttons'>
-        <NavLink to={"/product/"+producto.id}>
-          <button className='btn btn-warning'>
-            Ver detalles
+          <button className='btn btn-danger' onClick={()=>handleDelete(producto)}>
+            Borrar del carrito
           </button>
-        </NavLink>
-        
       </CardActions>
 
     </Card>
