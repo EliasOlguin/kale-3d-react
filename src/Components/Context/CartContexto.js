@@ -9,15 +9,17 @@ const CustomProvider = ({children}) => {
   const [productos, setProductos] = useState([])
 
   const agregarProducto = (producto, count)=>{
-    
+    debugger
     const consulta = existeProducto(producto.id)
     console.log(consulta);
     if(!consulta){
       // producto.stock = producto.stock - count
       setProductos([...productos, producto])
+      const buscarProdu = productos.find( p => p.id == producto.id)
+      buscarProdu.stock = count
       console.log("entre a agregar ");
     }else{
-      let existe = productos.find(p => p.id == producto.id)
+      const existe = productos.find(p => p.id == producto.id)
       existe.stock = existe.stock + count
     }
     console.log(count);
@@ -26,8 +28,7 @@ const CustomProvider = ({children}) => {
   }
   const existeProducto = (id)=>{
     const existe = productos.find( p => p.id == id)
-    const estado = existe?true:false
-    return estado
+    return existe?true:false
   }
   const deleteProducto = (producto) =>{
     console.log("borre a ", producto);
