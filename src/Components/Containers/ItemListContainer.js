@@ -4,15 +4,15 @@ import { productos } from '../../services/FakeApi';
 import "./ItemListContainer.css"
 import { ItemList } from './Items/ItemList';
 import { db } from "../firebase/firebase";
-import { getDocs, collection, query } from "firebase/firestore";
-import { Button } from 'bootstrap';
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 export const ItemListContainer = ({greeting, carrito=false, carritoContent}) => {
   console.log(db);
   
   const [products, setProducts] = useState([])
+  const [category, setCategory] = useState("")
   
-  const {categoryId} = useParams();
+  const {categoryId} = useParams("");
 
   const perdirProductos = new Promise((res,rej)=>{
       carrito? res(carritoContent):res(productos)  
@@ -34,19 +34,21 @@ export const ItemListContainer = ({greeting, carrito=false, carritoContent}) => 
     }
 },[carritoContent])
   useEffect(()=>{
-      // const productsColletion = collection(db, "productos")
-      // getDocs(productsColletion)
-      // .then(data => console.log(data))
-      perdirProductos.then(res=>{
-        console.log(categoryId);
-        if (categoryId){
-          const filter = productos.filter((p)=> p.category === categoryId)
-          setProducts(filter)
-        }else{
-          setProducts(res)
-        }
-        console.log(res);
-      }).catch(e=>{
+      categoryId?setCategory(categoryId.toString()):console.log(categoryId);
+      const productsColletion = collection(db, 'productos');
+      const filterQ = query(productsColletion, where("category", "==" , category))
+
+      getDocs(categoryId?filterQ:productsColletion)
+      .then(data => {
+        const list = data.docs.map((p) =>{
+          return {
+            id:p.id,
+            ...p.data()}})
+            console.log(categoryId);
+            console.log(list);
+          setProducts(list)
+      })
+      .catch(e=>{
         console.log(e);
       })
   },[categoryId])

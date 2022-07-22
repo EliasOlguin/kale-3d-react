@@ -1,6 +1,5 @@
 import React from 'react'
 
-import logo from '../../assets/kale-3d-logo.jpg'
 import './NavBar.css'
 import { CartWidget } from './CartWidget';
 import { Link, NavLink } from 'react-router-dom';
@@ -17,7 +16,7 @@ export const NavBar = () => {
   return (
       <header className='nav'>
         <div>
-          <Link to="/"><img src={logo} alt='logo-kale3d' className='logo' /></Link>
+          <Link to="/"><img src="https://firebasestorage.googleapis.com/v0/b/kale3dreact.appspot.com/o/img%2Fkale3dlogo.jpg?alt=media&token=3165f4a0-f5b1-41a5-90bf-f427b79839e4" alt='logo-kale3d' className='logo' /></Link>
         </div>
 
         <nav className='nav-categories'>

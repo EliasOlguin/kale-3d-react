@@ -38,7 +38,7 @@ export const Item = ({producto,i}) => {
             {producto.nombre}
           </Typography>
           <Typography variant='body2' color="text.secondary">
-            Precio:{producto.precio}
+            Precio:${producto.precio}
           </Typography>
           <Typography variant='body2' color="text.secondary">
             Stock:{stock}
