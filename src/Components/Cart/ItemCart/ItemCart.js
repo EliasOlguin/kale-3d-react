@@ -8,7 +8,7 @@ import "./ItemCart.css"
 
 export const ItemCart = ({producto,i}) => {
   const {deleteProducto} = useContext(contexto)
-  const [stock, setStock] = useState(producto.stock)
+  const [stock, setStock] = useState(producto.cantidad)
   const [comprar, setComprar] = useState(false)
   const onAdd = (count) =>{
     setComprar(true)
@@ -28,7 +28,7 @@ export const ItemCart = ({producto,i}) => {
   
   
   return (
-    <Card style={{width:"14rem", height:"29rem", padding:"10px"}}>
+    <Card style={{width:"14rem", height:"29rem", padding:"10px", margin: "10px"}}>
       <CardActionArea>
         <CardImg src={producto.img} variant="top" alt={producto.nombre} style={{height:"15rem"}}  />
         <CardContent>

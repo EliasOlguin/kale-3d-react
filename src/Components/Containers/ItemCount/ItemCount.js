@@ -28,11 +28,11 @@ export const ItemCount = ({stock,initial = 1,onAdd, producto}) => {
   return (
     <div className='item-count col-12'>
         <div className='item-count-items '>
-        <button onClick={handleSub} className="btn btn-danger">-</button> 
-        <h3>{count}</h3> 
-        <button onClick={handlerAdd} className="btn btn-success">+</button>
+        <button onClick={handleSub} className="btn btn-primary col-4">  -  </button> 
+        <h3 className='col-4'>{count}</h3> 
+        <button onClick={handlerAdd} className="btn btn-primary col-4">  +  </button>
         </div>
-        <button onClick={agregarAlCarrito} className="btn btn-primary ">Agregar al carrito</button>
+        <button onClick={agregarAlCarrito} className="btn btn-success mt-2">Agregar al carrito</button>
     </div>
   )
 }
