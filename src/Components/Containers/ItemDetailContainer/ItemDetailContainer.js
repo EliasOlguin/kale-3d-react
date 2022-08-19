@@ -14,7 +14,11 @@ export const ItemDetailContainer = () => {
     useEffect(()=>{
       const productsColletion = collection(db, 'productos');
       const refDoc = doc(productsColletion, productId)
-      getDoc(refDoc).then(p => setProduct(p.data()))
+      getDoc(refDoc).then(p => {
+        const addProduct = p.data()
+        addProduct.id = productId
+        setProduct(addProduct)
+      })
     },[productId])
 
   return (

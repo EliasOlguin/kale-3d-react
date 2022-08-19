@@ -6,6 +6,7 @@ import { BrowserRouter as Router,Switch, Route,Link, BrowserRouter, Routes} from
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from "./Components/Cart/Cart"
 import CustomProvider from './Components/Context/CartContexto';
+import { CartForm } from './Components/Cart/CartForm/CartForm';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <CustomProvider>      
         <NavBar />
         <Routes>
-          <Route  path='/' element={<ItemListContainer greeting={"Bienvenido estos son nuestro productos "} />} />
+          <Route  path='/' element={<ItemListContainer greeting={"Bienvenido estos son nuestros productos "} />} />
           <Route  path='/categories/:categoryId' element={<ItemListContainer greeting={"Bienvenido estos son nuestro productos"} />} />
           <Route  path='/product/:productId' element={<ItemDetailContainer />} />
           <Route  path='/cart' element={<Cart />} />
