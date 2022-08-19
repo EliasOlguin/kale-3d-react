@@ -1,21 +1,24 @@
 import React from "react";
-import { Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Slide } from "@mui/material";
 
-
-export const ModalCompoment = ({ title, children, openPopup, setOpenPopup, theme }) => {
+export const ModalCompoment = ({
+  title,
+  children,
+  openPopup,
+  setOpenPopup,
+  theme,
+}) => {
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   return (
     <Dialog
+      TransitionComponent={Transition}
       onClose={() => {
         setOpenPopup(false);
       }}
-      open={openPopup}>
-      <DialogTitle>
-        <div style={{width: "500px"}}>
-          <div className="text-center py-2">
-            <h1 style={{fontSize: "30px", width: "300px"}}>{title}</h1>
-          </div>
-        </div>
-      </DialogTitle>
+      open={openPopup}
+    >
       <DialogContent dividers sx={{ maxHeight: "none" }}>
         {children}
       </DialogContent>

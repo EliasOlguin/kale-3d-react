@@ -10,14 +10,13 @@ const Cart = () => {
   const [carrito, setCarrito] = useState(true);
   const [carritoContent, setCarritoContent] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  console.log(productos);
-  useEffect( () =>{
-    if (productos.length > 0){
+  useEffect(() => {
+    if (productos.length > 0) {
       setCarritoContent(true);
     } else {
       setCarritoContent(false);
     }
-  },[productos])
+  }, [productos]);
   return (
     <div className="flex">
       <div>
@@ -28,17 +27,25 @@ const Cart = () => {
         />
       </div>
       {carritoContent && (
-        <div className="d-flex flex-row-reverse" style={{marginRight: "14px"}}>
+        <div
+          className="d-flex flex-row-reverse"
+          style={{ marginRight: "14px" }}
+        >
           <div className="card" style={{ width: "12rem" }}>
             <div className="card-body">
               <h5 className="card-title">Precio total:</h5>
               <p className="card-text">${precioTotal}</p>
-              <button className="btn btn-primary" onClick={() => setOpenModal(true)}>Terminar compra</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => setOpenModal(true)}
+              >
+                Terminar compra
+              </button>
             </div>
           </div>
-        <ModalCompoment title="Terminar la compra" openPopup={openModal} setOpenPopup={setOpenModal} >
-          <CartForm></CartForm>
-        </ModalCompoment>
+          <ModalCompoment openPopup={openModal} setOpenPopup={setOpenModal}>
+            <CartForm setOpenPopup={setOpenModal}></CartForm>
+          </ModalCompoment>
         </div>
       )}
     </div>
