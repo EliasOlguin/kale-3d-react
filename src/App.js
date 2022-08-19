@@ -6,6 +6,7 @@ import { BrowserRouter as Router,Switch, Route,Link, BrowserRouter, Routes} from
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from "./Components/Cart/Cart"
 import CustomProvider from './Components/Context/CartContexto';
+import { CartForm } from './Components/Cart/CartForm/CartForm';
 
 
 function App() {
