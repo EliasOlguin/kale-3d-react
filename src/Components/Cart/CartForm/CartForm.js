@@ -1,5 +1,11 @@
 import { Input, InputLabel } from "@mui/material";
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import React, { useContext, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
@@ -7,7 +13,7 @@ import { contexto } from "../../Context/CartContexto";
 import { db } from "../../firebase/firebase";
 
 export const CartForm = ({ setOpenPopup }) => {
-  const { deleteAll } = useContext(contexto);
+  const { deleteAll, productos } = useContext(contexto);
   const [recibo, setRecibo] = React.useState();
   const initialStateVar = {
     nombre: "",
@@ -20,16 +26,24 @@ export const CartForm = ({ setOpenPopup }) => {
       defaultValues: initialStateVar,
     });
   const { isDirty, isValid, errors } = formState;
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+  const onRefreshStock = (id, stock) => {
+    const productsColletion = doc(db, "productos", id);
+    updateDoc(productsColletion, { stock: stock });
+  };
   const onTerminarCompra = (e) => {
+    productos.map((item) => {
+      onRefreshStock(item.id, item.stock);
+    });
+    const objSubmit = { ...e, date: serverTimestamp() };
     const collectionVentas = collection(db, "Ventas");
-    addDoc(collectionVentas, e).then((data) => {
+    addDoc(collectionVentas, objSubmit).then((data) => {
       setRecibo(data.id);
       //   deleteAll();
     });
   };
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
   return (
     <div>
       {recibo ? (
